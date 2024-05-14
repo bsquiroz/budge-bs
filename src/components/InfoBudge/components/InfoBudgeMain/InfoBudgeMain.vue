@@ -2,7 +2,7 @@
 import { useStore } from "../../../../composable/useStore";
 import { formatPrice } from "../../../../utils/formatPrice";
 
-const { valuesBudge } = useStore();
+const { valuesBudge, handleShowModalBudge } = useStore();
 </script>
 
 <template>
@@ -21,7 +21,10 @@ const { valuesBudge } = useStore();
         <span class="font-bold">Restante: </span>
         {{ formatPrice(valuesBudge.rest) }}
       </p>
-      <button class="bg-blue-500 p-2 rounded-full font-bold w-1/2 self-center">
+      <button
+        class="bg-blue-500 p-2 rounded-full font-bold w-1/2 self-center"
+        @click="() => handleShowModalBudge(true)"
+      >
         Agregar un gasto
       </button>
     </div>
