@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Title from "../Title/Title.vue";
+
 import { ref } from "vue";
 import { useStore } from "../../composable/useStore";
 
@@ -19,6 +21,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
+  <Title class="text-center mb-4" title="Defina un presupuesto" />
   <form class="grid gap-5" @submit.prevent="handleSubmit">
     <label class="flex flex-col gap-4"
       ><span class="font-bold text-xl">Presupuesto</span>
