@@ -51,10 +51,12 @@ const handleSubmit = () => {
             class="rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white outline-none"
             v-model="objSell.type"
           >
-            <option value="1">Categoria 1</option>
-            <option value="2">Categoria 2</option>
-            <option value="3">Categoria 3</option>
-            <option value="4">Categoria 4</option>
+            <option value="rent_house">Arriendo</option>
+            <option value="bus">Pasajes bus</option>
+            <option value="university">Universidad</option>
+            <option value="eat">Comida</option>
+            <option value="cinema">Cine</option>
+            <option value="other">otros</option>
           </select>
         </label>
 
