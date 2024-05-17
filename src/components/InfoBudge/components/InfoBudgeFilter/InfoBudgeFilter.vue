@@ -59,7 +59,7 @@ watch(filters.value, () => (keySellFilter.value = Object.keys(filters.value)));
 
     <section
       v-if="showOptionsFilters"
-      class="absolute grid gap-1 bg-slate-900 rounded-lg top-11 p-4"
+      class="absolute grid gap-1 bg-slate-900 rounded-lg top-14 p-4 z-10"
     >
       <article
         v-for="(value, key) in categories"

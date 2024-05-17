@@ -20,7 +20,7 @@ const keySellFilter = ref<string[]>([]);
 const filterSell = computed(() => {
   return !keySellFilter.value.length
     ? sells.value
-    : sells.value.filter((sell) => !keySellFilter.value.includes(sell.type));
+    : sells.value.filter((sell) => keySellFilter.value.includes(sell.type));
 });
 
 const objSell = reactive<Sell>({
