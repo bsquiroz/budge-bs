@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, Transition, TransitionGroup } from "vue";
+import { ref, watch } from "vue";
 import { categories, Categories } from "../../../../constants";
 import { useStore } from "../../../../composable/useStore";
 
