@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, Transition, TransitionGroup } from "vue";
 import { categories, Categories } from "../../../../constants";
 import { useStore } from "../../../../composable/useStore";
 
@@ -23,9 +23,8 @@ watch(filters.value, () => (keySellFilter.value = Object.keys(filters.value)));
       :class="{ 'border-blue-500': showOptionsFilters }"
     >
       <p v-if="!Object.values(filters).length">Filtrar...</p>
-
       <article
-        v-else
+        v-if="Object.values(filters).length"
         v-for="(value, key) in filters"
         :key="value.name"
         class="flex items-center gap-4"
