@@ -27,7 +27,7 @@ const handleSubmit = () => {
   <Transition>
     <section
       v-if="showModalBudge"
-      class="h-screen fixed bg-black/50 w-screen left-0 top-0 flex justify-center items-center text-white"
+      class="h-screen fixed bg-black/50 w-screen left-0 top-0 flex justify-center items-center text-white z-50"
     >
       <form
         @submit.prevent="handleSubmit"
