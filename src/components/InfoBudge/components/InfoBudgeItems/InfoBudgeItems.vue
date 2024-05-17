@@ -3,7 +3,7 @@ import { useStore } from "../../../../composable/useStore";
 import { categories } from "../../../../constants";
 import { formatPrice } from "../../../../utils/formatPrice";
 
-const { filterSell } = useStore();
+const { filterSell, showModalEdit } = useStore();
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const { filterSell } = useStore();
       v-for="item in filterSell"
       :key="item.id"
       :style="{ borderColor: categories[item.type].color }"
-      class="p-4 rounded-lg border-2 flex gap-4 items-center"
+      class="relative p-4 rounded-lg border-2 flex gap-4 items-center group"
     >
       <div
         :style="{ color: categories[item.type].color }"
@@ -32,6 +32,11 @@ const { filterSell } = useStore();
         <p>
           <small>{{ item.date }}</small>
         </p>
+        <i
+          class="bx bx-edit cursor-pointer absolute right-2 bottom-2 opacity-0 group-hover:opacity-100"
+          :style="{ color: categories[item.type].color }"
+          @click="showModalEdit(item)"
+        ></i>
       </div>
     </article>
 

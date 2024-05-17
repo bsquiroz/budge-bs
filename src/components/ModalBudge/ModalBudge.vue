@@ -2,14 +2,24 @@
 import { Transition } from "vue";
 import { useStore } from "../../composable/useStore";
 
-const { showModalBudge, objSell, handleAddSell, handleShowModalBudge } =
-  useStore();
+const {
+  showModalBudge,
+  objSell,
+  handleAddSell,
+  handleShowModalBudge,
+  handleEditSell,
+  handleDeleteSell,
+} = useStore();
 
 const handleSubmit = () => {
   if (!objSell.amount || !objSell.name || !objSell.type)
     return alert("todos los datos son necesarios");
 
-  handleAddSell();
+  if (objSell.id) {
+    handleEditSell();
+  } else {
+    handleAddSell();
+  }
 };
 </script>
 
@@ -24,9 +34,12 @@ const handleSubmit = () => {
         class="bg-slate-900 p-4 rounded-lg min-w-96 grid gap-4 relative"
       >
         <i
-          class="bx bx-x-circle absolute -top-2 -right-2 cursor-pointer"
+          class="bx bx-x-circle absolute -top-4 -right-4 cursor-pointer text-3xl text-red-500"
           @click="() => handleShowModalBudge(false)"
         />
+        <h2 class="font-extrabold text-3xl text-center">
+          {{ objSell.id ? "Formulario editar" : "Formulario crear" }}
+        </h2>
         <label class="flex flex-col gap-2"
           ><span class="font-bold text-xl">Nombre del gasto</span>
           <input
@@ -60,9 +73,23 @@ const handleSubmit = () => {
           </select>
         </label>
 
-        <button class="bg-blue-500 px-4 py-2 rounded-full font-bold">
-          Guardar Gasto!
-        </button>
+        <div class="flex">
+          <button
+            class="px-4 py-2 rounded-full font-bold flex-1"
+            :class="{
+              'bg-blue-500': !objSell.id,
+              'bg-yellow-500 text-black': objSell.id,
+            }"
+          >
+            {{ objSell.id ? "Editar" : "Guardar" }}
+          </button>
+
+          <i
+            v-if="objSell.id"
+            class="bx bxs-trash-alt text-3xl cursor-pointer text-red-500"
+            @click="handleDeleteSell"
+          />
+        </div>
       </form>
     </section>
   </Transition>

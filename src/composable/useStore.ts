@@ -52,6 +52,12 @@ export function useStore() {
     setLS("valuesSell", valuesBudge.sell);
   };
 
+  const showModalEdit = (sell: Sell) => {
+    showModalBudge.value = true;
+
+    Object.assign(objSell, sell);
+  };
+
   const handleShowModalBudge = (value: boolean) => {
     if (value) return (showModalBudge.value = true);
 
@@ -64,6 +70,29 @@ export function useStore() {
     objSell.date = formatDate();
 
     sells.value.push({ ...objSell });
+
+    restoreObjSell();
+
+    showModalBudge.value = false;
+  };
+
+  const handleEditSell = () => {
+    const index = sells.value.findIndex((item) => item.id === objSell.id);
+
+    sells.value[index] = { ...objSell };
+
+    restoreObjSell();
+
+    showModalBudge.value = false;
+  };
+
+  const handleDeleteSell = () => {
+    const res = confirm("Seguro que quieres eliminar?");
+    if (!res) return;
+
+    const index = sells.value.findIndex((item) => item.id === objSell.id);
+
+    sells.value.splice(index, 1);
 
     restoreObjSell();
 
@@ -105,5 +134,8 @@ export function useStore() {
     handleBudge,
     handleShowModalBudge,
     handleAddSell,
+    handleEditSell,
+    handleDeleteSell,
+    showModalEdit,
   };
 }
