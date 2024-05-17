@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, TransitionGroup } from "vue";
 import { categories, Categories } from "../../../../constants";
 import { useStore } from "../../../../composable/useStore";
 
@@ -23,28 +23,30 @@ watch(filters.value, () => (keySellFilter.value = Object.keys(filters.value)));
       :class="{ 'border-blue-500': showOptionsFilters }"
     >
       <p v-if="!Object.values(filters).length">Filtrar...</p>
-      <article
-        v-if="Object.values(filters).length"
-        v-for="(value, key) in filters"
-        :key="value.name"
-        class="flex items-center gap-4"
-      >
-        <div
-          v-html="value.icon"
-          :style="{ color: value.color }"
-          class="text-lg"
-        />
-        <p>{{ value.name }}</p>
-        <i
-          class="bx bx-x text-red-500 hover:bg-red-600 hover:rounded-full hover:text-white"
-          @click="
-            () => {
-              delete filters[key];
-              handleShowOptionsFilters(false);
-            }
-          "
-        ></i>
-      </article>
+      <TransitionGroup name="list">
+        <article
+          v-if="Object.values(filters).length"
+          v-for="(value, key) in filters"
+          :key="value.name"
+          class="flex items-center gap-4"
+        >
+          <div
+            v-html="value.icon"
+            :style="{ color: value.color }"
+            class="text-lg"
+          />
+          <p>{{ value.name }}</p>
+          <i
+            class="bx bx-x text-red-500 hover:bg-red-600 hover:rounded-full hover:text-white"
+            @click="
+              () => {
+                delete filters[key];
+                handleShowOptionsFilters(false);
+              }
+            "
+          ></i>
+        </article>
+      </TransitionGroup>
 
       <i
         class="bx"
