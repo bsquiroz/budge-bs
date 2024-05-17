@@ -3,14 +3,14 @@ import { useStore } from "../../../../composable/useStore";
 import { categories } from "../../../../constants";
 import { formatPrice } from "../../../../utils/formatPrice";
 
-const { sells } = useStore();
+const { filterSell } = useStore();
 </script>
 
 <template>
   <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     <article
-      v-if="sells.length"
-      v-for="item in sells"
+      v-if="filterSell.length"
+      v-for="item in filterSell"
       :key="item.id"
       :style="{ borderColor: categories[item.type].color }"
       class="p-4 rounded-lg border-2 flex gap-4 items-center"
@@ -18,6 +18,7 @@ const { sells } = useStore();
       <div
         :style="{ color: categories[item.type].color }"
         v-html="categories[item.type].icon"
+        class="text-2xl"
       />
       <div>
         <p class="font-bold">

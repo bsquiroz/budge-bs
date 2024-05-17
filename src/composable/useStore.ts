@@ -1,4 +1,4 @@
-import { reactive, ref, watch } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 
 import { Sell } from "../constants";
 import { formatDate } from "../utils/formatDate";
@@ -15,6 +15,13 @@ const valuesBudge = reactive({
 });
 
 const sells = ref<Sell[]>(getLS("sells") || []);
+const keySellFilter = ref<string[]>([]);
+
+const filterSell = computed(() => {
+  return !keySellFilter.value.length
+    ? sells.value
+    : sells.value.filter((sell) => !keySellFilter.value.includes(sell.type));
+});
 
 const objSell = reactive<Sell>({
   id: "",
@@ -93,6 +100,8 @@ export function useStore() {
     showModalBudge,
     objSell,
     sells,
+    filterSell,
+    keySellFilter,
     handleBudge,
     handleShowModalBudge,
     handleAddSell,
