@@ -12,6 +12,7 @@ const valuesBudge = reactive({
   bugbe: getLS("valuesBudge") || 0,
   sell: getLS("valuesSell") || 0,
   rest: getLS("valuesRest") || 0,
+  percent: getLS("valuesPercent") || 0,
 });
 
 const sells = ref<Sell[]>(getLS("sells") || []);
@@ -122,6 +123,16 @@ export function useStore() {
     () => setLS("valuesSell", valuesBudge.sell)
   );
   watch(sells.value, () => setLS("sells", sells.value));
+
+  watch(sells.value, () => {
+    const sellTotal = sells.value.reduce((ac, cu) => (ac += cu.amount), 0);
+
+    valuesBudge.sell = sellTotal;
+    valuesBudge.rest = valuesBudge.bugbe - sellTotal;
+    valuesBudge.percent = (valuesBudge.sell * 100) / valuesBudge.bugbe;
+
+    setLS("valuesPercent", valuesBudge.percent);
+  });
 
   return {
     budge,
