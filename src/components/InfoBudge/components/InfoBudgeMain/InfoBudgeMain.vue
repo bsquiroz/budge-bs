@@ -71,6 +71,6 @@ const colorPercent = computed(() => {
 }
 
 .circle:nth-child(2) {
-  stroke-dasharray: calc(var(--percent) + 1) 100;
+  stroke-dasharray: var(--percent) 100;
 }
 </style>
